@@ -34,7 +34,8 @@ def divisibility_check(n):
 	for div in divisors:
 		m = n
 		while m%div == 0:
-			print('{} is divisible by {}'.format(n,div))
+			if m==n:
+				print('{} is divisible by {}'.format(n,div))
 			divisible_by.append(div)
 			m = m / div
 
@@ -47,21 +48,31 @@ def divisibility_check(n):
 
 def division(x, y):
 
+	'''
+	It uses the function divisibility_check()
+	to get the lists of the divisors: A and B.
+	Then it makes a "difference" element by element
+	of A and B: this will be the list C.
+	The result of x/y will be the product of the
+	element of C.
+
+	Parameters
+    ----------
+    x : int
+        a number
+    y : int
+        a number
+
+    Returns
+    -------
+    division: int
+    	a number: x/y 
+	'''
+
 	from collections import Counter
 
-	divisors_x, pow_x = divisibility_check(x)
-	divisors_y, pow_y = divisibility_check(y)
-
-	A = []
-	B = []
-
-	for i in range(0,len(divisors_x)):
-		for j in range(0, pow_x[i]):
-			A.append(divisors_x[i])
-
-	for i in range(0,len(divisors_y)):
-		for j in range(0, pow_y[i]):
-			B.append(divisors_y[i])
+	A = divisibility_check(x)
+	B = divisibility_check(y)
 
 
 	counter_A = Counter(A)
@@ -73,9 +84,9 @@ def division(x, y):
 	if len(C)>0:
 		from functools import reduce
 		import operator
-		product = reduce(operator.mul, C)
+		division = reduce(operator.mul, C)
 		print('{} dividied by {} is:'.format(x,y))
-		return product
+		return division
 
 	else:
 		return print('{} is not divisible by {}'.format(x,y))
@@ -86,6 +97,6 @@ if __name__ == "__main__" :
     x = sys.argv[1]
     y = sys.argv[2]
     #print(x,y)
-    print(divisibility_check_new(x))
-    #print(divisibility_check_new(y))
+    #print(divisibility_check(x))
+    #print(divisibility_check(y))
     print(division(x,y))
