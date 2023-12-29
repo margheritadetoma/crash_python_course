@@ -38,6 +38,9 @@ def divisibility_check(n):
 				print('{} is divisible by {}'.format(n,div))
 			divisible_by.append(div)
 			m = m / div
+		if (m ==n):
+			print('{} is not divisible by {}'.format(n,div))
+
 
 
 	return divisible_by
@@ -79,12 +82,12 @@ def division(x, y):
 	counter_B = Counter(B)
 
 
-	C = list((counter_A - counter_B).elements())
+	C = list((counter_A - counter_B).elements()) #simplify all the same elements in common between A and B
 
-	if len(C)>0:
+	if len(C)>0: #If this condition is not satisfied, x and y are not divisible
 		from functools import reduce
 		import operator
-		division = reduce(operator.mul, C)
+		division = reduce(operator.mul, C) #multiply all the element of C
 		print('{} dividied by {} is:'.format(x,y))
 		return division
 
