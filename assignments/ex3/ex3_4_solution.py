@@ -1,6 +1,23 @@
 import sys
 
-def sieve_of_Eratosthenes(n):
+def prime_numbers_Eratosthenes(n):
+	
+	'''
+    A function that finds the list of prime integer numbers smaller than 100
+
+    Parameters
+    ----------
+    n : int 
+        the n-th term of the sequence
+
+    Returns
+    -------
+    fib_sew: list
+        a list with the Fibonacci sequence
+
+    '''
+
+
 	n = int(n)
 
 	from collections import Counter
@@ -10,7 +27,7 @@ def sieve_of_Eratosthenes(n):
 
 	index = 0
 
-	if n>2:
+	if n>=2:
 		while index < n:
 			step = prime_numbers[index]
 
@@ -28,13 +45,22 @@ def sieve_of_Eratosthenes(n):
 		return prime_numbers
 
 
-	else:
-		return [2]
+	elif n>100:
+		print('Error: {} > 100'.format(n))
+		return 
+
+	elif n<2:
+		print('No prime numbers < {}'.format(n))
+		return 
+
+
+
+
 
 
 if __name__ == "__main__":
 	n = sys.argv[1]
-	print(sieve_of_Eratosthenes(n))
+	print(prime_numbers_Eratosthenes(n))
 
 
 

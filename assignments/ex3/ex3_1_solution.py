@@ -34,12 +34,13 @@ def divisibility_check(n):
 	for div in divisors:
 		m = n
 		while m%div == 0:
-			if m==n:
+			if m==n: #first round
 				print('{} is divisible by {}'.format(n,div))
 			divisible_by.append(div)
 			m = m / div
-		if (m ==n):
+		if (m==n):
 			print('{} is not divisible by {}'.format(n,div))
+			return np.nan
 
 
 
@@ -50,6 +51,7 @@ def divisibility_check(n):
 
 
 def division(x, y):
+	import numpy as np
 
 	'''
 	It uses the function divisibility_check()
@@ -92,7 +94,8 @@ def division(x, y):
 		return division
 
 	else:
-		return print('{} is not divisible by {}'.format(x,y))
+		print('{} is not divisible by {}'.format(x,y))
+		return np.nan
 
 
 
