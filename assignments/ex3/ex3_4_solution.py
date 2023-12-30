@@ -18,12 +18,12 @@ def prime_numbers_Eratosthenes(n):
     '''
 
 
-	n = int(n)
-
 	from collections import Counter
 	import numpy as np
 
-	prime_numbers = list(np.arange(2, int(n)+1, 1))
+	prime_numbers = list(np.arange(2, n+1))
+
+
 
 	index = 0
 
@@ -59,7 +59,7 @@ def prime_numbers_Eratosthenes(n):
 
 
 if __name__ == "__main__":
-	n = sys.argv[1]
+	n = int(sys.argv[1])
 	print(prime_numbers_Eratosthenes(n))
 
 

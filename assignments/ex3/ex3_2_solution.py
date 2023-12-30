@@ -1,6 +1,6 @@
 import sys
 
-def fibonacci(n):
+def fibonacci(n: int):
 
     '''
     A function that calculates the Fibonacci sequence up to the n-th term
@@ -8,7 +8,7 @@ def fibonacci(n):
     Parameters
     ----------
     n : int 
-        the n-th term of the sequence
+        n-th term of the sequence
 
     Returns
     -------
@@ -17,23 +17,19 @@ def fibonacci(n):
 
     '''
 
-    fib_seq = [0, 1]
+    fib_seq = []
 
-    if int(n) < 0:
-        print('Error: {} < 0'.format(n))
-    
-    elif n==0:
-        return [0]
-    
-    elif n==1:
-        return fib_seq
+    if n <= 0:
+        print(f'Error: {n} < 0')
     
     
-    while True:
-        new_term = fib_seq[-1] + fib_seq[-2]
-        if new_term > int(n):
-            return fib_seq
-        fib_seq.append(new_term)
+    for i in range(n):
+        if i==0 or i==1:
+            fib_seq.append(1)
+            continue
+        fib_seq.append(fib_seq[-1] + fib_seq[-2])
+
+    return fib_seq
 
 
 
@@ -41,7 +37,7 @@ def fibonacci(n):
 
 def test_odd(input_list):
     '''
-    Take only the odd elements of the input list.
+    Take only the odd index values of the input list.
 
     Parameters
     ----------
@@ -50,22 +46,20 @@ def test_odd(input_list):
 
     Returns
     -------
-    odd_elements: list
-        a list of the odd elements
-        contained in input_list
+    odd_index_elements: list
+        a list of the odd index elements
 
     '''
+    
 
-    odd_elements = [elem for elem in input_list if elem % 2 != 0]
-
-    return odd_elements
+    return input_list[::2]
 
 
 
 
 def test_even(input_list):
     '''
-    Take only the even elements of the input list.
+    Take only the even index values of the input list.
 
     Parameters
     ----------
@@ -74,27 +68,25 @@ def test_even(input_list):
 
     Returns
     -------
-    even_elements: list
-        a list of the even elements
-        contained in input_list
+    even_index_elements: list
+        a list of the even index elements
 
     '''
+    
 
-    even_elements = [elem for elem in input_list if elem % 2 == 0]
-
-    return even_elements
+    return input_list[1::2]
 
 
 
 
 
 if __name__ == "__main__":
-    n = sys.argv[1]
-    print("Fibonacci sequence up to {}:".format(n))
+    n = int(sys.argv[1])
+    print(f"Fibonacci sequence up to the {n}-th term:")
 
     fib_list = fibonacci(n)
-    
     print(fib_list)
-    print('Even numbers of {} is: {}'.format(fib_list, test_even(fib_list)))
-    print('Odd numbers of {} is: {}'.format(fib_list, test_odd(fib_list)))
+    
+    print(test_odd(fib_list))
+    print(test_even(fib_list))
 
