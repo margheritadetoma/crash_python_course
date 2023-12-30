@@ -20,13 +20,13 @@ def divisibility_check(n: int) -> list[int]:
     '''
 
 
-	divisors = [2, 3, 5, 7]
+	divisors = [2, 3, 5, 7] #divisors to check
 	divisible_by = []
 
 	for div in divisors:
-		if n%div==0:
+		if n%div==0: #if this is true, n is divisible by div
 			print(f'{n} is divisible by {div}')
-			divisible_by.append(div)
+			divisible_by.append(div) #aapend div to the list of divisible numbers
 
 
 	return divisible_by
@@ -55,13 +55,13 @@ def division(x, y):
     	False if not divisible
 	'''
 
-	if x%y==0:
+	if x%y==0: #check if x is divisible by y
 		print(f'{x} is divisible by {y}')
 		return True
-	if y%x==0:
+	if y%x==0: #check if y is divisible by x
 		print(f'{y} is divisible by {x}')
 		return True
-	else:
+	else: 
 		print(f'{x},{y} are not divisible by each other')
 		return False
 
