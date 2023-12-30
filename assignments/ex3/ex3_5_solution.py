@@ -21,8 +21,6 @@ def decomposition_prime_factors(n):
 
     '''
 
-	n = int(n)
-
 
 	prime_numbers = prime_numbers_Eratosthenes(n)
 	decomposition = []
@@ -84,13 +82,14 @@ def check_decomposition(decomposition, n):
 
 
 if __name__ == "__main__":
-	n = sys.argv[1]
+	n = int(sys.argv[1])
 
 	print('Decomposition of {} in prime factors:'.format(n))
 	decomposition = decomposition_prime_factors(n)
 	print(decomposition)
 
 	#Check the decomposition
+	print('Decomposition test result:')
 	check_decomposition(decomposition, n)
 	
 
