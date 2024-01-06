@@ -1,6 +1,6 @@
 import sys
 
-def prime_numbers_Eratosthenes(n):
+def prime_numbers_eratosthenes(n):
 	
 	'''
     A function that finds the list of prime integer numbers smaller than 100
@@ -18,10 +18,7 @@ def prime_numbers_Eratosthenes(n):
     '''
 
 
-	from collections import Counter
-	import numpy as np
-
-	prime_numbers = list(np.arange(2, n+1))
+	prime_numbers = list(range(2, n+1))
 
 
 
@@ -31,7 +28,7 @@ def prime_numbers_Eratosthenes(n):
 		while index < n:
 			step = prime_numbers[index]
 
-			to_be_deleted = list(np.arange(2*step, n+1, step))
+			to_be_deleted = list(range(2*step, n+1, step))
 			if len(to_be_deleted)==0:
 				return prime_numbers
 
@@ -60,7 +57,7 @@ def prime_numbers_Eratosthenes(n):
 
 if __name__ == "__main__":
 	n = int(sys.argv[1])
-	print(prime_numbers_Eratosthenes(n))
+	print(prime_numbers_eratosthenes(n))
 
 
 
