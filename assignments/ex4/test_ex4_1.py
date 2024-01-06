@@ -42,11 +42,15 @@ class TestRational(unittest.TestCase):
     def test_mul(self):
         pass
 
+
     def test_eq(self):
         pass
 
+
     def test_hash(self):
         pass
+
+
 
 
 

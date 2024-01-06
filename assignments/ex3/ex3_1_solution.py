@@ -4,7 +4,7 @@ import sys
 def divisibility_check(n: int) -> list[int]:
 
 	'''
-	Check of the integer value from input is
+	Checks of the integer value from input is
 	divisible by 2,3,5 or 7.
 
     Parameters
@@ -19,27 +19,24 @@ def divisibility_check(n: int) -> list[int]:
 
     '''
 
-
-	divisors = [2, 3, 5, 7] #divisors to check
+	divisors = [2, 3, 5, 7]  # Divisors to be checked
 	divisible_by = []
 
 	for div in divisors:
-		if n%div==0: #if this is true, n is divisible by div
+		if n % div == 0:  # If this is true, n is divisible by div
 			print(f'{n} is divisible by {div}')
-			divisible_by.append(div) #aapend div to the list of divisible numbers
+			# Append div to the list of divisible numbers
+			divisible_by.append(div)
 
 
 	return divisible_by
 
 
 
-
-
-
 def division(x, y):
 
 	'''
-	Function that checks if x is divisible by y.
+	Checks if x is divisible by y
 
 	Parameters
     ----------
@@ -55,10 +52,10 @@ def division(x, y):
     	False if not divisible
 	'''
 
-	if x%y==0: #check if x is divisible by y
+	if x%y==0:  # Check if x is divisible by y
 		print(f'{x} is divisible by {y}')
 		return True
-	if y%x==0: #check if y is divisible by x
+	if y%x==0:  # Check if y is divisible by x
 		print(f'{y} is divisible by {x}')
 		return True
 	else: 

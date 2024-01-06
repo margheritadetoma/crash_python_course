@@ -3,7 +3,7 @@ import sys
 def prime_numbers_eratosthenes(n):
 	
 	'''
-    A function that finds the list of prime integer numbers smaller than 100
+    Finds the list of prime integer numbers smaller than 100
 
     Parameters
     ----------
@@ -14,13 +14,9 @@ def prime_numbers_eratosthenes(n):
     -------
     fib_sew: list
         a list with the Fibonacci sequence
-
     '''
 
-
 	prime_numbers = list(range(2, n+1))
-
-
 
 	index = 0
 
@@ -35,7 +31,7 @@ def prime_numbers_eratosthenes(n):
 			# Find the complement of the intersection
 			prime_numbers = [x for x in prime_numbers if x not in set(prime_numbers) & set(to_be_deleted)]
 
-			#find the new start
+			# Find the new start
 			index = prime_numbers.index(step) + 1
 			
 
@@ -54,11 +50,6 @@ def prime_numbers_eratosthenes(n):
 
 
 
-
 if __name__ == "__main__":
 	n = int(sys.argv[1])
 	print(prime_numbers_eratosthenes(n))
-
-
-
-

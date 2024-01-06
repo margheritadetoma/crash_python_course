@@ -55,10 +55,13 @@ class Rational() :
     """
 
 
+
     def __init__(self, x, precision=1.e-5):
+        
         self.num, self.den = self.continued_fraction_approx(x, precision)
         self.num, self.den = self.simplify_common_factors_of_fraction(self.num, self.den)
         self.precision = precision
+
 
 
     def continued_fraction_approx(self, x, p):
@@ -104,6 +107,7 @@ class Rational() :
 
 
     def simplify_common_factors_of_fraction(self, x, y):
+
         '''
         Simplifies the common factors of the 
         decomposition in prime factors of x and y
@@ -140,7 +144,9 @@ class Rational() :
         return num, den
 
 
+
     def __str__(self):
+
         '''
         Prints as a string the number given as rational
 
@@ -155,7 +161,9 @@ class Rational() :
         return f'{self.num}/{self.den}'
 
 
+
     def __repr__(self):
+
         '''
         Prints a string containing info about the float
         input number and the requested precision
@@ -172,6 +180,7 @@ class Rational() :
 
 
     def __add__(self, r2): #r2 = second rational
+
         '''
         Makes the addition between the rational representation
         up to the specified precision of two float numbers
@@ -191,7 +200,9 @@ class Rational() :
         return r_sum
 
 
+
     def __mul__(self, r2):
+
         '''
         Makes the product between the rational representation
         up to the specified precision of two float numbers
@@ -211,7 +222,9 @@ class Rational() :
         return r_prod
 
 
+
     def __eq__(self, r2):
+
         '''
         Tests if two numbers are equal checking their rational 
         representation up to the specified precision
@@ -229,8 +242,10 @@ class Rational() :
 
         return (self.num == r2.num and self.den == r2.den)
 
+
     
     def __hash__(self):
+
         '''
         Uses the Cantor pairing function to make the a unique
         number from the numerator and denominator of the rational

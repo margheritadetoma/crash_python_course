@@ -2,11 +2,12 @@ import sys
 from assignments.ex3.ex3_4_solution import prime_numbers_eratosthenes
 
 
+
 def decomposition_prime_factors(n):
 
     '''
-    A function that finds the decomposition
-    in prime factors of a positive integer number.
+    Finds the decomposition in prime factors
+    of a positive integer number.
 
     Parameters
     ----------
@@ -32,6 +33,8 @@ def decomposition_prime_factors(n):
     prime_numbers = prime_numbers_eratosthenes(n)
     decomposition = []
 
+    # Decomposition in prime factors checking the outcome
+    # of the module operator
     for prime_num in prime_numbers:
         while n%prime_num==0:
             decomposition.append(prime_num)
@@ -43,11 +46,9 @@ def decomposition_prime_factors(n):
 
 
 def check_decomposition(decomposition, n):
-    n = int(n)
 
     '''
-    A function that test if the decomposition
-    in prime numbers is correct.
+    Tests if the decomposition in prime numbers is correct.
 
     Parameters
     ----------
@@ -65,7 +66,9 @@ def check_decomposition(decomposition, n):
         False: uncorrect decomposition
     '''
 
+    n = int(n)
 
+    # Makes the product of the list elements
     product = 1
     for i in range(0, len(decomposition)):
         product = product *  decomposition[i]
@@ -82,12 +85,6 @@ def check_decomposition(decomposition, n):
 
 
 
-
-
-
-
-
-
 if __name__ == "__main__":
     n = int(sys.argv[1])
 
@@ -98,11 +95,3 @@ if __name__ == "__main__":
     #Check the decomposition
     print('Decomposition test result:')
     check_decomposition(decomposition, n)
-    
-
-
-
-
-
-
-
