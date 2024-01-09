@@ -24,7 +24,7 @@ class Rational() :
         Converts the float 'x' into a fraction up to the
         precision 'p' using the continued fraction method
 
-    simplify_common_factors_of_fraction(x, y)
+    simplify_common_factors(x, y)
         Simplifies the common factors of the 
         decomposition in prime factors of x and y
 
@@ -39,13 +39,31 @@ class Rational() :
         Makes the addition between the rational representation
         up to the specified precision of two float numbers
 
+    __sub__():
+        Makes the subtraction between the rational representation
+        up to the specified precision of two float numbers
+
     __mul__():
         Makes the product between the rational representation
+        up to the specified precision of two float numbers
+
+    __div__():
+        Makes the division between the rational representation
         up to the specified precision of two float numbers
 
     __eq__():
         Tests if two numbers are equal checking their rational 
         representation up to the specified precision
+
+    __gt__():
+        Tests if the first number is greater than the
+        second one checking their rational representation
+        up to the specified precision
+
+    __lt__():
+        Tests if the first number is lesser than the
+        second one checking their rational representation
+        up to the specified precision
 
     __hash__():
         Uses the Cantor pairing function to make the a unique
@@ -57,9 +75,8 @@ class Rational() :
 
 
     def __init__(self, x, precision=1.e-5):
-        
         self.num, self.den = self.continued_fraction_approx(x, precision)
-        self.num, self.den = self.simplify_common_factors_of_fraction(self.num, self.den)
+        self.num, self.den = self.simplify_common_factors(self.num, self.den)
         self.precision = precision
 
 
@@ -90,6 +107,12 @@ class Rational() :
             x = -x
             sgn = -1
 
+        # Check if the number is a int. Eventually,
+        # returns num = x and den = 1
+        if isinstance(x, int):
+            return x, 1
+
+
         ai = math.floor(x)
         xi = x - ai
         nj, ni = 1, ai   #j=i-1
@@ -101,16 +124,21 @@ class Rational() :
             ni, nj = ai * ni + nj, ni
             di, dj = ai * di + dj, di
 
-        ni, di = self.simplify_common_factors_of_fraction(ni, di)
+        ni, di = self.simplify_common_factors(ni, di)
 
         return sgn*ni, di
 
 
-    def simplify_common_factors_of_fraction(self, x, y):
+
+    def simplify_common_factors(self, x, y):
 
         '''
         Simplifies the common factors of the 
-        decomposition in prime factors of x and y
+        decomposition in prime factors of x and y.
+
+        !! Warning !!:
+        x is assumed to be the numerator
+        and y the denominator
 
         Parameters
         ----------
@@ -127,12 +155,28 @@ class Rational() :
 
         x_dec = decomposition_prime_factors(x)
         y_dec = decomposition_prime_factors(y)
+
+
+        if x==1:
+            return 1, y
+
+        if y==1:
+            return x, 1
+
+        if x==0:
+            return 0, 1
+
+        if y==0:
+            print('Divison by zero.')
+            return None, None
         
+   
         for element in x_dec[:]:  # Use x_dec[:] to create a copy of the list
             if element in y_dec:
                 x_dec.remove(element)
                 y_dec.remove(element)
 
+        # Do the product of the decomposition factors
         num = 1
         for i in range(0, len(x_dec)):
             num *= x_dec[i]
@@ -179,7 +223,8 @@ class Rational() :
         return f'Rational({self.num/self.den}, precision={self.precision})'
 
 
-    def __add__(self, r2): #r2 = second rational
+
+    def __add__(self, other): #r2 = second rational
 
         '''
         Makes the addition between the rational representation
@@ -187,7 +232,7 @@ class Rational() :
 
         Parameters
         ----------
-        r2 : class Rational()
+        other : class Rational()
 
         Returns
         -------
@@ -195,13 +240,31 @@ class Rational() :
             sum of two rational numbers (still a rational)
         '''
 
-        r_sum = Rational(1)
-        r_sum.num, r_sum.den = self.simplify_common_factors_of_fraction(self.num * r2.den + self.den * r2.num, self.den * r2.den)
-        return r_sum
+        return Rational(self.num/self.den + other.num/other.den)
 
 
 
-    def __mul__(self, r2):
+    def __sub__(self, other): #r2 = second rational
+
+        '''
+        Makes the subtraction between the rational representation
+        up to the specified precision of two float numbers
+
+        Parameters
+        ----------
+        other : class Rational()
+
+        Returns
+        -------
+        r_sum : class Rational()
+            subtraction of two rational numbers (still a rational)
+        '''
+
+        return Rational(self.num/self.den - other.num/other.den)
+
+
+
+    def __mul__(self, other):
 
         '''
         Makes the product between the rational representation
@@ -209,7 +272,7 @@ class Rational() :
 
         Parameters
         ----------
-        r2 : class Rational()
+        other : class Rational()
 
         Returns
         -------
@@ -217,13 +280,30 @@ class Rational() :
             product of two rational numbers (still a rational)
         '''
 
-        r_prod = Rational(1) 
-        r_prod.num, r_prod.den = self.simplify_common_factors_of_fraction(self.num * r2.num, self.den * r2.den)
-        return r_prod
+        return Rational(self.num * other.num / (self.den * other.den))
+
+
+    def __div__(self, other):
+
+        '''
+        Makes the division between the rational representation
+        up to the specified precision of two float numbers
+
+        Parameters
+        ----------
+        other : class Rational()
+
+        Returns
+        -------
+        r_div : class Rational()
+            division of two rational numbers (still a rational)
+        '''
+
+        return Rational(self.num * other.den / (self.den * other.num))
 
 
 
-    def __eq__(self, r2):
+    def __eq__(self, other):
 
         '''
         Tests if two numbers are equal checking their rational 
@@ -231,7 +311,7 @@ class Rational() :
 
         Parameters
         ----------
-        r2 : class Rational()
+        other : class Rational()
 
         Returns
         -------
@@ -240,7 +320,51 @@ class Rational() :
             False: the two rational numbers are different
         '''
 
-        return (self.num == r2.num and self.den == r2.den)
+        return (self.num == other.num and self.den == other.den)
+
+
+
+    def __gt__(self, other):
+
+        '''
+        Tests if the first number is greater than the
+        second one checking their rational representation
+        up to the specified precision
+
+        Parameters
+        ----------
+        other : class Rational()
+
+        Returns
+        -------
+        boolean: True/False
+            True: first number greater than second one
+            False: first number lesser than second one
+        '''
+
+        return (self.num/self.den > other.num/other.den)
+
+
+
+    def __lt__(self, other):
+
+        '''
+        Tests if the first number is lesser than the
+        second one checking their rational representation
+        up to the specified precision
+
+        Parameters
+        ----------
+        other : class Rational()
+
+        Returns
+        -------
+        boolean: True/False
+            True: first number lesser than second one
+            False: first number greater than second one
+        '''
+
+        return (self.num/self.den < other.num/other.den)
 
 
     
@@ -264,9 +388,14 @@ class Rational() :
 
 
 
+
 if __name__=='__main__':
     r1 = Rational(3.1415926)
-    r2 = Rational(3.14159)
+    r2 = Rational(3.1415926)
+    r3 = Rational(3.1415926 ** 2)
 
-    print(r1.simplify_common_factors_of_fraction(56,12))
+    print(r2<r3)
+
+    #print(r1.simplify_common_factors(56,12))
+    #print(r3)
 

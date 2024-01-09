@@ -1,8 +1,9 @@
 import sys
 
-def prime_numbers_eratosthenes(n):
-	
-	'''
+
+def prime_numbers_eratosthenes(n, n_max=100):
+    
+    '''
     Finds the list of prime integer numbers smaller than 100
 
     Parameters
@@ -12,44 +13,38 @@ def prime_numbers_eratosthenes(n):
 
     Returns
     -------
-    fib_sew: list
+    fib_seq: list
         a list with the Fibonacci sequence
     '''
 
-	prime_numbers = list(range(2, n+1))
+    if n < 2:
+        print(f'No prime numbers < {n}')
+        return 
 
-	index = 0
-
-	if n>=2:
-		while index < n:
-			step = prime_numbers[index]
-
-			to_be_deleted = list(range(2*step, n+1, step))
-			if len(to_be_deleted)==0:
-				return prime_numbers
-
-			# Find the complement of the intersection
-			prime_numbers = [x for x in prime_numbers if x not in set(prime_numbers) & set(to_be_deleted)]
-
-			# Find the new start
-			index = prime_numbers.index(step) + 1
-			
-
-		return prime_numbers
+    if n > n_max:
+        print(f'Error: {n} > {n_max}')
+        return
 
 
-	elif n>100:
-		print('Error: {} > 100'.format(n))
-		return 
+    prime_numbers = list(range(2, n+1))
 
-	elif n<2:
-		print('No prime numbers < {}'.format(n))
-		return 
+    index = 0
+    while index < len(prime_numbers):
+        prime = prime_numbers[index]
 
+        aux_index = index + 1
+        while aux_index < len(prime_numbers):
+            if prime_numbers[aux_index] % prime == 0:
+                del prime_numbers[aux_index]
+            else:
+                # increment index only if no elements deleted
+                aux_index += 1
 
-
+        index += 1
+        
+    return prime_numbers
 
 
 if __name__ == "__main__":
-	n = int(sys.argv[1])
-	print(prime_numbers_eratosthenes(n))
+    n = int(sys.argv[1])
+    print(prime_numbers_eratosthenes(n))

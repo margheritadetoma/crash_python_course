@@ -25,12 +25,14 @@ def decomposition_prime_factors(n):
     if not isinstance(n, int):
         raise ValueError('n must be an int')
 
+    if n==0:
+        return []
+    
     if n==1:
-        print('Warning: n=1 has no decomposition in prime numbers. Returning [1]')
-        return [1]
+        return []
 
 
-    prime_numbers = prime_numbers_eratosthenes(n)
+    prime_numbers = prime_numbers_eratosthenes(n, n_max=1e6)
     decomposition = []
 
     # Decomposition in prime factors checking the outcome
@@ -66,7 +68,6 @@ def check_decomposition(decomposition, n):
         False: uncorrect decomposition
     '''
 
-    n = int(n)
 
     # Makes the product of the list elements
     product = 1
