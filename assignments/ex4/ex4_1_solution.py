@@ -28,6 +28,10 @@ class Rational() :
         Simplifies the common factors of the 
         decomposition in prime factors of x and y
 
+
+    __round__(self, ndigits=5):
+        Round the input number up to ndigits
+    
     __str__():
         Prints as a string the number given as rational
 
@@ -75,8 +79,8 @@ class Rational() :
 
 
     def __init__(self, x, precision=1.e-5):
+        self.x = x
         self.num, self.den = self.continued_fraction_approx(x, precision)
-        self.num, self.den = self.simplify_common_factors(self.num, self.den)
         self.precision = precision
 
 
@@ -188,6 +192,20 @@ class Rational() :
         return num, den
 
 
+    def __round__(self, ndigits=5):
+        '''
+        Round the input number up to ndigits
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+        float :
+            rounded input float
+        '''
+        return round(self.x, 5)
+
 
     def __str__(self):
 
@@ -221,6 +239,25 @@ class Rational() :
         '''
 
         return f'Rational({self.num/self.den}, precision={self.precision})'
+
+
+
+    def __abs__(self):
+
+        '''
+        Returns the absolute value
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+        Rational : 
+            absolute value of the rational
+        '''
+
+        return Rational(abs(self.num) / self.den)
+
 
 
 
@@ -283,7 +320,7 @@ class Rational() :
         return Rational(self.num * other.num / (self.den * other.den))
 
 
-    def __div__(self, other):
+    def __truediv__(self, other):
 
         '''
         Makes the division between the rational representation

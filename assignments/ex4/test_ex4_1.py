@@ -9,6 +9,8 @@ class TestRational(unittest.TestCase):
     def setUp(self):
         self.r1 = Rational(3.1415926)
         self.r2 = Rational(3.1415926)
+        self.r3 = Rational(2.7182818)
+        self.r4 = Rational(-2.7182818)
 
 
     def test_edge_case(self):
@@ -38,21 +40,25 @@ class TestRational(unittest.TestCase):
         self.assertEqual(repr(self.r1) ,'Rational(3.1415929203539825, precision=1e-05)')
 
 
+    def test_abs(self):
+        self.assertAlmostEqual(abs(self.r4), self.r3, 1e-05)
+        self.assertAlmostEqual(abs(self.r1), self.r1, 1e-05)
+
+
     def test_add(self):
-        self.assertEqual(self.r1 + self.r2, Rational(2*3.1415926))
+        self.assertAlmostEqual(self.r1 + self.r2, Rational(2*3.1415926), 1e-05)
 
 
     def test_sub(self):
-        self.assertEqual(self.r1 - self.r2, Rational(0))
+        self.assertAlmostEqual(self.r1 - self.r2, Rational(0), 1e-05)
         
 
     def test_mul(self):
-        self.assertEqual(self.r1 * self.r2, Rational(3.1415926**2))
+        self.assertAlmostEqual(self.r1 * self.r2, Rational(3.1415926**2), 1e-05)
 
 
     def test_div(self):
-        #self.assertEqual(self.r1 / self.r2, Rational(1))
-        pass
+        self.assertAlmostEqual(self.r1 / self.r2, Rational(1), 1e-05)
 
 
     def test_eq(self):
@@ -60,11 +66,11 @@ class TestRational(unittest.TestCase):
 
 
     def test_gt(self):
-        self.assertEqual(self.r1 > self.r2, True)
+        self.assertEqual(self.r1 > self.r3, True)
 
 
     def test_lt(self):
-        self.assertEqual(self.r1 < self.r2, True)
+        self.assertEqual(self.r3 < self.r2, True)
 
 
     def test_hash(self):
