@@ -114,10 +114,14 @@ class Rational() :
             x = -x
             sgn = -1
 
-        # Check if the number is a int. Eventually,
+        # Check if the number is a int !=0. Eventually,
         # returns num = x and den = 1
-        if isinstance(x, int):
+        if isinstance(x, int) and x!=0:
             return x, 1
+
+        # If x=0, return num = 0 and den = None
+        if x==0:
+            return 0, None
 
 
         ai = math.floor(x)

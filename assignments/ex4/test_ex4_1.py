@@ -7,25 +7,25 @@ class TestRational(unittest.TestCase):
 
     
     def setUp(self):
-        self.r1 = Rational(3.1415926)
-        self.r2 = Rational(3.1415926)
+        self.r1 = Rational(3.1415927)
+        self.r2 = Rational(3.1415927)
         self.r3 = Rational(2.7182818)
         self.r4 = Rational(-2.7182818)
 
 
     def test_edge_case(self):
-        r_test = Rational(1)
-        self.assertEqual(r_test.num, 1)
-        self.assertEqual(r_test.den, 1)
-    
-
-    def test_num_den(self):
-        self.assertEqual(self.r1.num, 355)
-        self.assertEqual(self.r1.den, 113)
+        #Check int
+        r_test_1 = Rational(1)
+        r_test_0 = Rational(0)
+        self.assertEqual(r_test_1.num, 1)
+        self.assertEqual(r_test_1.den, 1)
+        self.assertEqual(r_test_0.num, 0)
+        self.assertEqual(r_test_0.den, None)
+        
 
 
     def test_continued_fraction_approx(self):
-        self.assertEqual(self.r1.continued_fraction_approx(3.1415926, 1e-5), (355,113))
+        self.assertEqual(self.r1.continued_fraction_approx(3.1415927, 1e-5), (355,113))
 
 
     def test_simplify_common_factors(self):
@@ -46,7 +46,7 @@ class TestRational(unittest.TestCase):
 
 
     def test_add(self):
-        self.assertAlmostEqual(self.r1 + self.r2, Rational(2*3.1415926), 1e-05)
+        self.assertAlmostEqual(self.r1 + self.r2, Rational(2*3.1415927), 1e-05)
 
 
     def test_sub(self):
@@ -54,7 +54,7 @@ class TestRational(unittest.TestCase):
         
 
     def test_mul(self):
-        self.assertAlmostEqual(self.r1 * self.r2, Rational(3.1415926**2), 1e-05)
+        self.assertAlmostEqual(self.r1 * self.r2, Rational(3.1415927**2), 1e-05)
 
 
     def test_div(self):
