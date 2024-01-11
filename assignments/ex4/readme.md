@@ -2,11 +2,11 @@
 #######  EX 4 SOLUTION  ######
 ##############################
 
-I created a Rational() class that takes as input the float x.
+The Rational() class takes in input a float x and a precision p.
 
-The __init__ call the module continued_fraction_approx() that converts x into a fraction between num and den up to the given precision (p) using the continued fraction method.
-The function preliminarly stores the sign and also checks if the input number is an int. Then it does the cycle in the while loop accordingly to the algorithm of the continued fraction giving the numerator and denominator. Then it is called the module simplify_common_factors() which simplifies the common factor between num and den using the decomposion in prime factors. It first calls the function decomposition_prime_factors() importing it from assignments.ex3.ex3_5_solution. Decomposition_prime_factors() finds the decomposition in prime factors of x and y and returns them as lists (x_dec, y_dec). Note that it is the full decomposition, not only the prime numbers which are divisible by the input value (e.g. 12 would be [2,2,3]).
-Then some side cases are checked (x=1, y= 1, x=0, y=0). The loop then remove from x_dec and y_dec all the values that are in common. Then the new numerator (num) is the product of all the x_dec and the denominator (den) is the product of all the y_dec. The function returns the  numerator (num, with sign) and the denominator (den). 
+The __init__ calls the method continued_fraction_approx() that converts x into a fraction (num/den) up to the given precision (p) using the continued fraction method.
+The function preliminarly stores the sign and also checks if x is an int (eventually it returns num=x, den=1). Then the iterative continued fraction algorithm returns the numerator and denominator. Then the method simplify_common_factors() simplifies the common factor between num and den using the decomposion in prime factors. The method first calls the function decomposition_prime_factors() importing it from assignments.ex3.ex3_5_solution. decomposition_prime_factors() finds the decomposition in prime factors of x and y and returns them as lists (x_dec, y_dec). Note that it is the full decomposition, not only the prime numbers which are divisible by the input value (e.g. 12 would be [2,2,3]).
+Then some side cases are checked (x=1, y=1, x=0, y=0). A loop then removes from x_dec and y_dec all the values that are in common. The new numerator (num) will be the product of the remaining x_dec and the denominator (den) the product of the remaining y_dec. The function returns the numerator (sign * num) and the denominator (den). 
 
 
 The class contains also some dundler methods:
@@ -16,21 +16,21 @@ The class contains also some dundler methods:
 
 - __abs__: compute the absolute value
 
-- __add__(): Makes the addition between the rational representation up to the specified precision of two float numbers
+- __add__(): makes the addition between the rational representation up to the specified precision of two float numbers
 
-- __sub__(): Makes the subtraction between the rational representation up to the specified precision of two float numbers
+- __sub__(): makes the subtraction between the rational representation up to the specified precision of two float numbers
 
-- __mul__(): Makes the product between the rational representation up to the specified precision of two float numbers
+- __mul__(): makes the product between the rational representation up to the specified precision of two float numbers
 
-- __truediv__(): Makes the division between the rational representation up to the specified precision of two float numbers
+- __truediv__(): makes the division between the rational representation up to the specified precision of two float numbers
 
-- __eq__(): Tests if two numbers are equal checking their rational representation up to the specified precision
+- __eq__(): tests if two numbers are equal checking their rational representation up to the specified precision
 
-- __gt__(): Tests if the first number is greater than the second one checking their rational representation up to the specified precision
+- __gt__(): tests if the first number is greater than the second one checking their rational representation up to the specified precision
 
-- __lt__(): Tests if the first number is lesser than the second one checking their rational representation up to the specified precision
+- __lt__(): tests if the first number is lesser than the second one checking their rational representation up to the specified precision
 
-- __hash__(): Uses the Cantor pairing function to make the a unique number from the numerator d denominator of the rational representation
+- __hash__(): uses the Cantor pairing function to make the a unique number from the numerator d denominator of the rational representation
 
 
 
@@ -40,7 +40,7 @@ The class contains also some dundler methods:
 #############################
 
 The class TestRational is used to implement some tests for the Rational class inheriting the unittest.TestCase class provided by the unittest module.
-The number that are used are pi (taken with 7 digits, 3.1415926) and the nepero number e (taken with 7 digits, 2.7182818):
+The number that are used are pi (taken with 7 digits, 3.1415926) and the Nepero number e (taken with 7 digits, 2.7182818):
 - r1 = Rational(3.1415927);
 - r2 = Rational(3.1415927);
 - r3 = Rational(2.7182818);

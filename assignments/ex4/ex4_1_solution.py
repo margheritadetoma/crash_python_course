@@ -82,7 +82,6 @@ class Rational() :
 
 
     def __init__(self, x, precision=1.e-5):
-        self.x = x
         self.num, self.den = self.continued_fraction_approx(x, precision)
         self.precision = precision
 
@@ -114,14 +113,10 @@ class Rational() :
             x = -x
             sgn = -1
 
-        # Check if the number is a int !=0. Eventually,
+        # Check if the number is a int. Eventually,
         # returns num = x and den = 1
-        if isinstance(x, int) and x!=0:
+        if isinstance(x, int):
             return x, 1
-
-        # If x=0, return num = 0 and den = None
-        if x==0:
-            return 0, None
 
 
         ai = math.floor(x)
@@ -199,6 +194,7 @@ class Rational() :
         return num, den
 
 
+
     def __round__(self, ndigits=5):
 
         '''
@@ -213,7 +209,7 @@ class Rational() :
             rounded input float
         '''
 
-        return round(self.x, 5)
+        return round(self.num/self.den, 5)
 
 
 
@@ -270,8 +266,7 @@ class Rational() :
 
 
 
-
-    def __add__(self, other): #r2 = second rational
+    def __add__(self, other):
 
         '''
         Makes the addition between the rational representation
@@ -291,7 +286,7 @@ class Rational() :
 
 
 
-    def __sub__(self, other): #r2 = second rational
+    def __sub__(self, other):
 
         '''
         Makes the subtraction between the rational representation
@@ -441,8 +436,5 @@ if __name__=='__main__':
     r2 = Rational(3.1415926)
     r3 = Rational(3.1415926 ** 2)
 
-    print(r2<r3)
-
-    #print(r1.simplify_common_factors(56,12))
-    #print(r3)
+    print(r1)
 

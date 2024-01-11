@@ -14,14 +14,15 @@ class TestRational(unittest.TestCase):
 
 
     def test_edge_case(self):
-        #Check int
+        # Check an int
         r_test_1 = Rational(1)
+        # Check zero
         r_test_0 = Rational(0)
         self.assertEqual(r_test_1.num, 1)
         self.assertEqual(r_test_1.den, 1)
         self.assertEqual(r_test_0.num, 0)
-        self.assertEqual(r_test_0.den, None)
-        
+        self.assertEqual(r_test_0.den, 1)
+
 
 
     def test_continued_fraction_approx(self):
