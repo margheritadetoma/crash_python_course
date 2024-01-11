@@ -43,10 +43,10 @@ The class contains also some dundler methods:
 
 The class TestRational is used to implement some tests for the Rational class inheriting the unittest.TestCase class provided by the unittest module.
 The number that are used are pi (taken with 7 digits, 3.1415926) and the Nepero number e (taken with 7 digits, 2.7182818):
-- r1 = Rational(3.1415927);
-- r2 = Rational(3.1415927);
-- r3 = Rational(2.7182818);
-- r4 = Rational(-2.7182818).
+> - r1 = Rational(3.1415927);
+> - r2 = Rational(3.1415927);
+> - r3 = Rational(2.7182818);
+> - r4 = Rational(-2.7182818).
 
 - test_edge_case: tests how a int number is treated (e.g. 1) and check the 0.
 
