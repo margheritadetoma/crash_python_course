@@ -38,6 +38,9 @@ class Rational() :
     __repr__():
         Prints a string containing info about the float
         input number and the requested precision
+    
+    __abs__(self):
+        Returns the absolute value
 
     __add__():
         Makes the addition between the rational representation
@@ -51,7 +54,7 @@ class Rational() :
         Makes the product between the rational representation
         up to the specified precision of two float numbers
 
-    __div__():
+    __truediv__():
         Makes the division between the rational representation
         up to the specified precision of two float numbers
 
@@ -193,6 +196,7 @@ class Rational() :
 
 
     def __round__(self, ndigits=5):
+
         '''
         Round the input number up to ndigits
 
@@ -204,7 +208,9 @@ class Rational() :
         float :
             rounded input float
         '''
+
         return round(self.x, 5)
+
 
 
     def __str__(self):
